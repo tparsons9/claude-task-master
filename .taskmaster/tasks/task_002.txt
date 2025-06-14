@@ -1,16 +1,11 @@
 # Task ID: 2
-# Title: Develop Command Line Interface Foundation
-# Status: done
+# Title: Implement Task Data Model and Validation
+# Status: pending
 # Dependencies: 1
 # Priority: high
-# Description: Create the basic CLI structure using Commander.js with command parsing and help documentation.
+# Description: Create the core task data structure with JSON schema validation for tasks.json file format
 # Details:
-Implement the CLI foundation including:
-- Set up Commander.js for command parsing
-- Create help documentation for all commands
-- Implement colorized console output for better readability
-- Add logging system with configurable levels
-- Handle global options (--help, --version, --file, --quiet, --debug, --json)
+Define Task and TaskCollection models matching the PRD specification. Implement Zod or similar validation library for type safety. Create TaskModel class with properties: id (number), title (string), description (string), status (enum: pending|done|deferred), dependencies (array of numbers), priority (enum: high|medium|low), details (string), testStrategy (string), subtasks (array). Implement validation methods for dependency chains (no circular dependencies, dependencies must exist). Create default tasks.json structure with meta object.
 
 # Test Strategy:
-Test each command with various parameters to ensure proper parsing. Verify help documentation is comprehensive and accurate. Test logging at different verbosity levels.
+Unit test task model creation with valid/invalid data, verify dependency validation catches circular references, test priority and status enum validation, ensure subtask structure validates correctly, verify tasks.json file can be read and written with proper schema validation

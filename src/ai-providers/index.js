@@ -4,12 +4,14 @@
  */
 
 export { AnthropicAIProvider } from './anthropic.js';
-export { PerplexityAIProvider } from './perplexity.js';
-export { GoogleAIProvider } from './google.js';
-export { OpenAIProvider } from './openai.js';
-export { XAIProvider } from './xai.js';
-export { OpenRouterAIProvider } from './openrouter.js';
-export { OllamaAIProvider } from './ollama.js';
-export { BedrockAIProvider } from './bedrock.js';
 export { AzureProvider } from './azure.js';
+export { BedrockAIProvider } from './bedrock.js';
+export { ClaudeCliAIProvider } from './claude-cli.js';
 export { VertexAIProvider } from './google-vertex.js';
+export { GoogleAIProvider } from './google.js';
+export { OllamaAIProvider } from './ollama.js';
+export { OpenAIProvider } from './openai.js';
+export { OpenRouterAIProvider } from './openrouter.js';
+export { PerplexityAIProvider } from './perplexity.js';
+export { XAIProvider } from './xai.js';
+

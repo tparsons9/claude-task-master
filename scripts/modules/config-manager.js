@@ -479,9 +479,13 @@ function getParametersForRole(role, explicitRoot = null) {
  * @returns {boolean} True if the API key is set, false otherwise.
  */
 function isApiKeySet(providerName, session = null, projectRoot = null) {
-	// Define the expected environment variable name for each provider
 	if (providerName?.toLowerCase() === 'ollama') {
 		return true; // Indicate key status is effectively "OK"
+	}
+	
+	// Claude CLI doesn't need an API key, just the CLAUDE_CLI_COMMAND
+	if (providerName?.toLowerCase() === 'claude-cli') {
+		return true; // Will be checked separately in ai-services-unified.js
 	}
 
 	const keyMap = {
