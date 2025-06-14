@@ -8,39 +8,39 @@
 
 // --- Core Dependencies ---
 import {
-	getMainProvider,
-	getMainModelId,
-	getResearchProvider,
-	getResearchModelId,
-	getFallbackProvider,
-	getFallbackModelId,
-	getParametersForRole,
-	getUserId,
-	MODEL_MAP,
-	getDebugFlag,
-	getBaseUrlForRole,
-	isApiKeySet,
-	getOllamaBaseURL,
-	getAzureBaseURL,
-	getBedrockBaseURL,
-	getVertexProjectId,
-	getVertexLocation
+    getAzureBaseURL,
+    getBaseUrlForRole,
+    getBedrockBaseURL,
+    getDebugFlag,
+    getFallbackModelId,
+    getFallbackProvider,
+    getMainModelId,
+    getMainProvider,
+    getOllamaBaseURL,
+    getParametersForRole,
+    getResearchModelId,
+    getResearchProvider,
+    getUserId,
+    getVertexLocation,
+    getVertexProjectId,
+    isApiKeySet,
+    MODEL_MAP
 } from './config-manager.js';
-import { log, findProjectRoot, resolveEnvVariable } from './utils.js';
+import { findProjectRoot, log, resolveEnvVariable } from './utils.js';
 
 // Import provider classes
 import {
-	AnthropicAIProvider,
-	PerplexityAIProvider,
-	GoogleAIProvider,
-	OpenAIProvider,
-	XAIProvider,
-	OpenRouterAIProvider,
-	OllamaAIProvider,
-	BedrockAIProvider,
-	AzureProvider,
-	VertexAIProvider,
-	ClaudeCliAIProvider
+    AnthropicAIProvider,
+    AzureProvider,
+    BedrockAIProvider,
+    ClaudeCliAIProvider,
+    GoogleAIProvider,
+    OllamaAIProvider,
+    OpenAIProvider,
+    OpenRouterAIProvider,
+    PerplexityAIProvider,
+    VertexAIProvider,
+    XAIProvider
 } from '../../src/ai-providers/index.js';
 
 // Create provider instances
@@ -763,8 +763,6 @@ async function logAiUsage({
 }
 
 export {
-	generateTextService,
-	streamTextService,
-	generateObjectService,
-	logAiUsage
+    generateObjectService, generateTextService, logAiUsage, streamTextService
 };
+

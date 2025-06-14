@@ -1,18 +1,11 @@
 # Task ID: 3
-# Title: Implement Basic Task Operations
-# Status: done
-# Dependencies: 1
+# Title: Build Core Task Management Operations
+# Status: pending
+# Dependencies: 2
 # Priority: high
-# Description: Create core functionality for managing tasks including listing, creating, updating, and deleting tasks.
+# Description: Implement CRUD operations for tasks including create, read, update, delete, and list functionality
 # Details:
-Implement the following task operations:
-- List tasks with filtering options
-- Create new tasks with required fields
-- Update existing task properties
-- Delete tasks
-- Change task status (pending/done/deferred)
-- Handle dependencies between tasks
-- Manage task priorities
+Create TaskManager class with methods: loadTasks() to read tasks.json, saveTasks() to write tasks.json with atomic writes, getTask(id) to retrieve single task, getAllTasks() with filtering options, createTask(taskData) with ID generation, updateTask(id, updates) with validation, deleteTask(id) with dependency checking. Implement proper error handling for file operations. Add transaction-like behavior to prevent data corruption. Create backup before modifications.
 
 # Test Strategy:
-Test each operation with valid and invalid inputs. Verify that dependencies are properly tracked and that status changes are reflected correctly in the tasks.json file.
+Test all CRUD operations with sample data, verify atomic writes prevent corruption during failures, test filtering by status and priority, ensure dependency constraints are enforced on delete, verify backup creation before modifications, test concurrent access scenarios

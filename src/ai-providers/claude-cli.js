@@ -15,10 +15,6 @@
 
 import { BaseAIProvider } from './base-provider.js';
 import { spawn } from 'child_process';
-import { promisify } from 'util';
-import { writeFileSync, unlinkSync, accessSync, constants } from 'fs';
-import { tmpdir } from 'os';
-import { join } from 'path';
 import { randomUUID } from 'crypto';
 
 /**
@@ -260,7 +256,6 @@ export class ClaudeCliAIProvider extends BaseAIProvider {
 	 */
 	async executeClaudeCli(input) {
 		let command = this.getClaudeCommand();
-		let tempFile;
 
 		try {
 			if (!command) {
@@ -296,18 +291,7 @@ export class ClaudeCliAIProvider extends BaseAIProvider {
 				args.push('-p');
 			}
 
-			// Validate the command exists and is executable
-			try {
-				accessSync(claudePath, constants.F_OK | constants.X_OK);
-			} catch (error) {
-				throw new Error(
-					`Claude CLI not found or not executable at: ${claudePath}. Please check your CLAUDE_CLI_COMMAND environment variable.`
-				);
-			}
-
-			// Create a temporary file for the prompt
-			tempFile = join(tmpdir(), `claude-prompt-${Date.now()}.txt`);
-			writeFileSync(tempFile, actualInput, 'utf8');
+			// Skip validation - let spawn handle command not found errors
 
 			// Execute the command using spawn for better security
 			return new Promise((resolve, reject) => {
@@ -325,10 +309,9 @@ export class ClaudeCliAIProvider extends BaseAIProvider {
 					5 * 60 * 1000
 				);
 
-				// Read from temp file and pipe to stdin
-				const fs = require('fs');
-				const readStream = fs.createReadStream(tempFile);
-				readStream.pipe(child.stdin);
+				// Write prompt directly to stdin
+				child.stdin.write(actualInput);
+				child.stdin.end();
 
 				child.stdout.on('data', (data) => {
 					stdout += data.toString();
@@ -356,15 +339,6 @@ export class ClaudeCliAIProvider extends BaseAIProvider {
 			});
 		} catch (error) {
 			throw error;
-		} finally {
-			// Clean up temp file
-			if (tempFile) {
-				try {
-					unlinkSync(tempFile);
-				} catch (e) {
-					// Ignore cleanup errors
-				}
-			}
 		}
 	}
 
